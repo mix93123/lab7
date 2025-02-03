@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตัวอย่างที่ 16 - สไลด์โชว์รูปภาพ</title>
+   
+</head>
+<body>
+    <div id="example16">
+        <h3>16. สไลด์โชว์รูปภาพ</h3>
+        <div class="slideshow">
+            <div>
+                <!-- รูปภาพที่จะแสดงในสไลด์โชว์ -->
+                <img id="slideImage" src="https://www.guilinlake.com/images/2017/08/07150820172514564839-guilinlake-400x300.jpg" alt="slideshow" />
+            </div>
+            <!-- ปุ่มเปลี่ยนสไลด์ -->
+            <button onclick="changeSlide(-1)">ก่อนหน้า</button>
+            <button onclick="changeSlide(1)">ถัดไป</button>
+        </div>
+    <style>
+        /* จัดตำแหน่งสไลด์โชว์ให้อยู่กึ่งกลาง */
+        .slideshow {
+            text-align: center;
+        }
+        /* กำหนดขนาดและระยะห่างของรูปภาพ */
+        .slideshow img {
+            max-width: 400px;
+            height: 300px;
+            margin: 10px;
+        }
+    </style>
+    
+    <script>
+        // สร้าง Array เก็บ URL รูปภาพ
+        const images = [
+            "https://www.guilinlake.com/images/2017/08/07150820172514564839-guilinlake-400x300.jpg",
+            "https://www.guilinlake.com/images/2017/10/06190320183014561037-guilinlake-400x300.jpg",
+            "https://www.guilinlake.com/images/2017/10/13231020174303448033-guilinlake-300x225.jpg",
+        ];
+        
+        let currentSlide = 0; // เก็บดัชนีของรูปภาพปัจจุบัน
+        
+        // ฟังก์ชันเปลี่ยนสไลด์
+        function changeSlide(direction) {
+            // คำนวณ index ของสไลด์ถัดไป
+            currentSlide = (currentSlide + direction + images.length) % images.length;
+            
+            // อัปเดตรูปภาพที่แสดงในสไลด์โชว์
+            document.getElementById("slideImage").src = images[currentSlide];
+        }
+    </script>
+    </div>
+</body>
+</html>
