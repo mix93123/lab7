@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ตัวอย่างที่ 19</title>
+    
+  </head>
+  <body>
+    <div id="example19">
+      <h3>19. แท็บเนื้อหา</h3>
+      
+      <!-- แท็บเลือก -->
+      <div class="tabs">
+        <button class="tab-button" onclick="showTab(0)">แท็บ 1</button>
+        <button class="tab-button" onclick="showTab(1)">แท็บ 2</button>
+        <button class="tab-button" onclick="showTab(2)">แท็บ 3</button>
+      
+
+      <!-- เนื้อหาของแท็บ -->
+      <div class="tab-content">เนื้อหาแท็บที่ 1</div>
+      <div class="tab-content">เนื้อหาแท็บที่ 2</div>
+      <div class="tab-content">เนื้อหาแท็บที่ 3</div>
+      </div>
+
+      <style>
+        /* การจัดสไตล์แท็บ */
+        .tabs {
+          margin: 20px 0;
+        }
+  
+        /* ซ่อนเนื้อหาของแท็บทั้งหมด */
+        .tab-content {
+          display: none;
+          padding: 10px;
+          border: 1px solid #ccc;
+        }
+  
+        /* แสดงเนื้อหาของแท็บที่เลือก */
+        .tab-content.active {
+          display: block;
+        }
+  
+        /* สไตล์ปุ่มแท็บ */
+        .tab-button {
+          margin-right: 5px;
+        }
+  
+        /* เพิ่มสไตล์เมื่อปุ่มแท็บถูกเลือก */
+        .tab-button.active {
+          font-weight: bold;
+        }
+      </style>
+      
+      <script>
+        // ฟังก์ชันแสดงแท็บที่เลือก
+        function showTab(tabIndex) {
+          // รับ elements ทั้งหมดที่มี class 'tab-content' และ 'tab-button'
+          const contents = document.getElementsByClassName("tab-content");
+          const buttons = document.getElementsByClassName("tab-button");
+
+          // ซ่อนเนื้อหาของแท็บทั้งหมด และลบ class 'active' จากปุ่ม
+          for (let i = 0; i < contents.length; i++) {
+            contents[i].style.display = "none";  // ซ่อนเนื้อหาของแท็บ
+            buttons[i].classList.remove("active");  // ลบการเน้นจากปุ่ม
+          }
+
+          // แสดงเนื้อหาของแท็บที่เลือก และเพิ่ม class 'active' ให้กับปุ่มที่เลือก
+          contents[tabIndex].style.display = "block";  // แสดงเนื้อหาของแท็บที่เลือก
+          buttons[tabIndex].classList.add("active");  // เพิ่มการเน้นให้กับปุ่มที่เลือก
+        }
+
+        // แสดงแท็บแรกเมื่อโหลดหน้า
+        showTab(0);
+      </script>
+    </div>
+  </body>
+</html>
