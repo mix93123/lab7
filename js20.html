@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ตัวอย่างที่ 20</title>
+  </head>
+  <body>
+    <div id="example20">
+      <h3>20. รายการสิ่งที่ต้องทำ (เก็บข้อมูลใน Local Storage)</h3>
+      <!-- ช่องกรอกข้อมูลและปุ่มเพิ่ม -->
+      <input type="text" id="todoInput" placeholder="เพิ่มรายการ..." />
+      <button onclick="addTodo()">เพิ่ม</button>
+
+      <!-- แสดงรายการ To-Do -->
+      <ul id="todoList"></ul>
+
+      <style>
+        /* สไตล์ของรายการ To-Do */
+        #todoList li {
+          display: flex;
+          align-items: center;
+          margin: 5px 0;
+        }
+  
+        /* สไตล์เมื่อรายการถูกทำเครื่องหมายเป็นเสร็จ */
+        .done {
+          text-decoration: line-through;
+          color: #888;
+        }
+      </style>
+
+      <script>
+        // โหลดข้อมูลจาก Local Storage ถ้ามี หรือสร้างอาเรย์ใหม่
+        let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+        // ฟังก์ชันสำหรับแสดงรายการทั้งหมด
+        function displayTodos() {
+          const list = document.getElementById("todoList");
+          list.innerHTML = "";  // เคลียร์รายการเก่า
+          
+          // วนลูปแสดงรายการทุกตัวใน todos
+          todos.forEach((todo, index) => {
+            const li = document.createElement("li");  // สร้างรายการใหม่
+            
+            // สร้าง checkbox
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = todo.done;  // กำหนดสถานะของ checkbox
+            checkbox.onchange = () => toggleTodo(index);  // ฟังก์ชันเมื่อคลิกที่ checkbox
+            
+            // สร้าง span สำหรับแสดงข้อความ
+            const span = document.createElement("span");
+            span.textContent = todo.text;
+            if (todo.done) span.classList.add("done");  // ถ้าทำเสร็จแล้วให้เพิ่มคลาส done
+
+            // สร้างปุ่มลบ
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "ลบ";
+            deleteBtn.onclick = () => deleteTodo(index);  // ฟังก์ชันเมื่อคลิกปุ่มลบ
+
+            // เพิ่ม elements เข้าไปใน li
+            li.appendChild(checkbox);
+            li.appendChild(span);
+            li.appendChild(deleteBtn);
+            list.appendChild(li);
+          });
+
+          // บันทึกข้อมูล todos ลงใน Local Storage
+          localStorage.setItem("todos", JSON.stringify(todos));
+        }
+
+        // ฟังก์ชันสำหรับเพิ่มรายการใหม่
+        function addTodo() {
+          const input = document.getElementById("todoInput");
+          const text = input.value.trim();  // ตัดช่องว่างที่ไม่จำเป็น
+          
+          if (text) {
+            todos.push({ text, done: false });  // เพิ่มรายการใหม่
+            input.value = "";  // เคลียร์ช่องกรอกข้อมูล
+            displayTodos();  // แสดงรายการใหม่
+          }
+        }
+
+        // ฟังก์ชันสำหรับสลับสถานะของรายการ (ทำเครื่องหมายเสร็จแล้ว)
+        function toggleTodo(index) {
+          todos[index].done = !todos[index].done;
+          displayTodos();  // แสดงรายการหลังจากการเปลี่ยนแปลง
+        }
+
+        // ฟังก์ชันสำหรับลบรายการ
+        function deleteTodo(index) {
+          todos.splice(index, 1);  // ลบรายการจากอาเรย์
+          displayTodos();  // แสดงรายการหลังจากการลบ
+        }
+
+        // แสดงรายการเมื่อโหลดหน้า
+        displayTodos();
+      </script>
+    </div>
+  </body>
+</html>
