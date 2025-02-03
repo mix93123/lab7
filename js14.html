@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตัวอย่างที่ 14</title>
+</head>
+<body>
+    <div id="example14">
+    <h3>14. นาฬิกาดิจิตอล</h3>
+    <div id = "clock" class="clock"></div>
+
+    <style>
+        .clock {
+            font-size: 2rem;
+            font-family: monospace;
+            padding: 10px;
+            border: 2px solid #333;
+            display: inline-block;
+        }
+    </style>
+
+    <script>
+        // ฟังก์ชันอัพเดทเวลา
+        function updateClock(){
+            const now = new Date();
+            // จัดรูปแบบเป็น HH:MM:SS
+            const time = now.toLocaleTimeString();
+            // อัพเดทข้อควาทในนาฬิกา
+            document.getElementById("clock").textContent = time;
+        }
+        // อัพเดทเวลาทุก 1 วิ
+        setInterval(updateClock, 1000);
+        // เรียกครั้งแรกทันที
+        updateClock();
+    </script>
+    </div>    
+</body>
+</html>
