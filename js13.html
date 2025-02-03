@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตัวอยางที่ 13</title>
+</head>
+<body>
+    <div id="example13">
+        <h3>13. รายการซื้อของ</h3>
+        <input type="text" id="itemInput" placeholder="ใส่ชื่อสินค้า">
+        <button onclick="addItem()">เพิ่มรายการ</button>
+        <ul id="shoppingList"></ul>
+
+        <script>
+            function addItem() {
+                // รับค่าจาก input
+                const input = document.getElementById("itemInput");
+                const itemName = input.value.trim();
+                
+                // ตรวจสอบว่ามีข้อความหรือไม่
+                if (itemName !== "") {
+                    // สร้าง element <li> ใหม่
+                    const li = document.createElement("li");
+                    li.textContent = itemName;
+                    
+                    // สร้างปุ่มลบ
+                    const deleteBtn = document.createElement("button");
+                    deleteBtn.textContent = "ลบ";
+                    deleteBtn.onclick = function () {
+                        li.remove(); // ลบรายการสินค้าเมื่อคลิกปุ่ม
+                    };
+                    
+                    // เพิ่มปุ่มลบลงใน <li>
+                    li.appendChild(deleteBtn);
+                    
+                    // เพิ่ม <li> ลงในรายการ
+                    document.getElementById("shoppingList").appendChild(li);
+                    
+                    // ล้างค่าใน input
+                    input.value = "";
+                }
+            }
+        </script>
+        <style>
+            /* กำหนดสไตล์ของรายการสินค้า */
+            #shoppingList li {
+                margin: 5px 0;
+            }
+            /* กำหนดระยะห่างของปุ่มลบ */
+            #shoppingList button {
+                margin-left: 10px;
+            }
+        </style>
+    </div>
+</body>
+</html>
